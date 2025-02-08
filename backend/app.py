@@ -1,68 +1,45 @@
-from flask import Flask, request, jsonify
-from flask_cors import CORS
-from PIL import Image
-import numpy as np
-import art
-import base64
-import io
+import pyfiglet
 
-app = Flask(_name_)
-CORS(app)  # Enable CORS for all routes
+def text_to_ascii_art(text, font="standard"):
+    """Converts text to ASCII art using pyfiglet.
 
-# ASCII characters used for image conversion (from darkest to lightest)
-ASCII_CHARS = "@%#*+=-:. "
+    Args:
+        text: The text to convert.
+        font: The pyfiglet font to use (e.g., "standard", "banner", "slant").
+              See pyfiglet's documentation for available fonts.
 
-def image_to_ascii(image):
-    # Convert image to grayscale
-    image = image.convert('L')
-    
-    # Resize image while maintaining aspect ratio
-    width = 100
-    aspect_ratio = image.size[1] / image.size[0]
-    height = int(width * aspect_ratio * 0.5)  # * 0.5 to account for terminal character spacing
-    image = image.resize((width, height))
-    
-    # Convert pixels to ASCII
-    pixels = np.array(image)
-    ascii_str = ''
-    
-    for row in pixels:
-        for pixel in row:
-            # Map pixel intensity to ASCII character
-            ascii_str += ASCII_CHARS[pixel * len(ASCII_CHARS) // 256]
-        ascii_str += '\n'
-    
-    return ascii_str
-
-@app.route('/convert/text', methods=['POST'])
-def convert_text():
+    Returns:
+        The ASCII art representation of the text, or None if there's an error
+        (e.g., invalid font).
+    """
     try:
-        data = request.get_json()
-        text = data.get('text', '')
-        
-        # Convert text to ASCII art using the art library
-        ascii_art = art.text2art(text)
-        
-        return jsonify({'ascii_art': ascii_art})
-    except Exception as e:
-        return jsonify({'error': str(e)}), 400
+        result = pyfiglet.figlet_format(text, font=font)
+        return result
+    except pyfiglet.FontNotFound:
+        return None  # Handle invalid font names
+    except Exception as e: # Catch any other exceptions.
+        print(f"An error occurred: {e}")
+        return None
 
-@app.route('/convert/image', methods=['POST'])
-def convert_image():
-    try:
-        # Get the image file from the request
-        if 'image' not in request.files:
-            return jsonify({'error': 'No image file provided'}), 400
-            
-        image_file = request.files['image']
-        
-        # Read and convert image
-        image = Image.open(image_file)
-        ascii_art = image_to_ascii(image)
-        
-        return jsonify({'ascii_art': ascii_art})
-    except Exception as e:
-        return jsonify({'error': str(e)}), 400
 
-if _name_ == '_main_':
-    app.run(debug=True, port=5000)
+# Get text input from the user:
+text_input = input("Enter the text to convert: ")
+font_input = input("Enter the font to use (optional, default is 'standard'): ")
+
+if not font_input: # If the user just pressed Enter.
+    font_input = "standard"
+
+ascii_art = text_to_ascii_art(text_input, font_input)
+
+if ascii_art:
+    print(ascii_art)
+else:
+    print(f"Error: Could not generate ASCII art. Check the font name '{font_input}'.")
+
+# Example usage with different fonts:
+print("\n--- Examples ---")
+print(text_to_ascii_art("Hello", "standard"))
+print(text_to_ascii_art("Python", "banner"))
+print(text_to_ascii_art("ASCII", "slant"))
+print(text_to_ascii_art("Error Test", "nonexistent_font")) # Example of an invalid font.
+
