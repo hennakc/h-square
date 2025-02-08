@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASCUS - ASCII Art Converter</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Courier New', monospace;
+        }
+
+        body {
+            min-height: 100vh;
+            background-image: url('background.png');
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+        }
+
+        .overlay {
+            min-height: 100vh;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .title {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .catchphrase {
+            font-size: 1.5rem;
+            color: #a8a8a8;
+            margin-bottom: 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .input-section {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .input-group {
+            flex: 1;
+            min-width: 300px;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 1.5rem;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+
+        .input-group h2 {
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+
+        textarea {
+            width: 100%;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+            padding: 1rem;
+            color: #fff;
+            font-size: 1rem;
+            resize: vertical;
+        }
+
+        .file-input {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        button:hover {
+            background: #45a049;
+        }
+
+        .output-section {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 1.5rem;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+
+        #asciiOutput {
+            width: 100%;
+            min-height: 300px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+            padding: 1rem;
+            color: #fff;
+            font-family: monospace;
+            white-space: pre;
+            overflow-x: auto;
+        }
+
+        @media (max-width: 768px) {
+            .title {
+                font-size: 3rem;
+            }
+            
+            .catchphrase {
+                font-size: 1.2rem;
+            }
+            
+            .input-section {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay">
+        <header>
+            <h1 class="title">ASCUS</h1>
+            <p class="catchphrase">ask us for ascii</p>
+        </header>
+        
+        <div class="container">
+            <div class="input-section">
+                <div class="input-group">
+                    <h2>Text to ASCII</h2>
+                    <textarea id="textInput" placeholder="Enter your text here..."></textarea>
+                    <button onclick="convertTextToAscii()">Convert Text</button>
+                </div>
+                
+                <div class="input-group">
+                    <h2>Image to ASCII</h2>
+                    <input type="file" accept="image/*" class="file-input" id="imageInput">
+                    <button onclick="convertImageToAscii()">Convert Image</button>
+                </div>
+            </div>
+            
+            <div class="output-section">
+                <h2>ASCII Output</h2>
+                <pre id="asciiOutput">Your ASCII art will appear here...</pre>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function convertTextToAscii() {
+            const text = document.getElementById('textInput').value;
+            // This is a simple demonstration - you would need to implement actual ASCII art conversion
+            const asciiArt = text.split('').map(char => char + ' ').join('');
+            document.getElementById('asciiOutput').textContent = asciiArt;
+        }
+
+        function convertImageToAscii() {
+            const fileInput = document.getElementById('imageInput');
+            if (fileInput.files && fileInput.files[0]) {
+                // This is where you would implement actual image to ASCII conversion
+                document.getElementById('asciiOutput').textContent = 'Image conversion would happen here...';
+            } else {
+                alert('Please select an image first.');
+            }
+        }
+    </script>
+</body>
+</html>
