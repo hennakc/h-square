@@ -5,45 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ASCUS - ASCII Art Converter</title>
     <style>
-        @keyframes gradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
+        @keyframes slideUp {
+  0% {
+    transform: translateY(100%); /* Start below the container */
+    opacity: 0; /* Start invisible */
+  }
+  100% {
+    transform: translateY(0%); /* End at its normal position */
+    opacity: 1; /* End fully visible */
+  }
+}
 
         body {
             margin: 0;
-            padding: 20px;
+            padding: 10px;
             min-height: 100vh;
-            background: linear-gradient(-45deg, #0a0a0a, #1a1a1a, #000000);
+            background:url('C:\Users\USER\OneDrive\Documents\GitHub\h-square\background')no-repeat center center fixed;
             background-size: 400% 400%;
             animation: gradient 15s ease infinite;
             font-family: 'Courier New', monospace;
-            color: #fff;
+            color: #ffffff;
             position: relative;
             overflow-x: hidden;
         }
 
-        .background-pattern {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            opacity: 0.15;
-            pointer-events: none;
-        }
-
-        .ascii-bg {
-            position: absolute;
-            font-size: 12px;
-            white-space: pre;
-            color: var(--color);
-            animation: float var(--duration) infinite linear;
-            opacity: var(--opacity);
-            filter: blur(var(--blur));
-        }
+    
+        
 
         @keyframes float {
             0% { transform: translateY(100vh) rotate(var(--rotation)); }
@@ -88,9 +75,9 @@
             }
             to {
                 text-shadow: 0 0 20px #fff,
-                           0 0 30px #ff00ff,
-                           0 0 40px #ff00ff,
-                           0 0 50px #ff00ff;
+                           0 0 30px #daf413,
+                           0 0 40px #fff700,
+                           0 0 50px #ffdd00;
             }
         }
 
