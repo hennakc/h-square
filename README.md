@@ -42,7 +42,7 @@ For Software:
 For Software:
 
 # Screenshots (Add at least 3)
-[![ascus scrn1](https://github.com/user-attachments/assets/bfdfcc7c-c8e6-45e8-b96b-6ed520d37774)
+[![scrn1](https://github.com/user-attachments/assets/4b06c908-9bee-4056-8338-08863171aa49)
 ]user interface of our website with attractive and classy features
 
 ![![ascus scrn2](https://github.com/user-attachments/assets/c1e82f06-6333-414f-814c-615ea526d634)
